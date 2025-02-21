@@ -20,7 +20,7 @@ interface Boleto {
   status: "Pago" | "Pendente" | "Atrasado";
   vencimento: string;
   valor: string;
-  codigoBarras: string; 
+  codigoBarras: string;
 }
 
 export function Boletos() {
@@ -35,7 +35,8 @@ export function Boletos() {
       status: "Pago",
       vencimento: "10/10/2023",
       valor: "R$ 500,00",
-      codigoBarras: "https://via.placeholder.com/300x100.png?text=Codigo+Barras+1",
+      codigoBarras:
+        "https://via.placeholder.com/300x100.png?text=Codigo+Barras+1",
     },
     {
       id: 2,
@@ -44,7 +45,8 @@ export function Boletos() {
       status: "Atrasado",
       vencimento: "19/02/2025",
       valor: "R$ 600,00",
-      codigoBarras: "https://via.placeholder.com/300x100.png?text=Codigo+Barras+2",
+      codigoBarras:
+        "https://via.placeholder.com/300x100.png?text=Codigo+Barras+2",
     },
     {
       id: 3,
@@ -53,7 +55,8 @@ export function Boletos() {
       status: "Pendente",
       vencimento: "16/10/2025",
       valor: "R$ 1.600,00",
-      codigoBarras: "https://via.placeholder.com/300x100.png?text=Codigo+Barras+3",
+      codigoBarras:
+        "https://via.placeholder.com/300x100.png?text=Codigo+Barras+3",
     },
   ];
 
@@ -67,20 +70,30 @@ export function Boletos() {
     setBoletos(boletosComStatusAtualizado);
   }, []);
 
-  const filteredBoletos = boletos.filter((boleto) =>
-    boleto.numeroNota.includes(searchTerm) ||
-    boleto.parcela.includes(searchTerm) ||
-    boleto.status.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBoletos = boletos.filter(
+    (boleto) =>
+      boleto.numeroNota.includes(searchTerm) ||
+      boleto.parcela.includes(searchTerm) ||
+      boleto.status.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const getStatusInfo = (status: "Pago" | "Pendente" | "Atrasado") => {
     switch (status) {
       case "Pago":
-        return { icon: <IoCheckmarkCircle className="text-green-500" />, color: "bg-green-100" };
+        return {
+          icon: <IoCheckmarkCircle className="text-green-500" />,
+          color: "bg-green-100",
+        };
       case "Pendente":
-        return { icon: <IoTime className="text-yellow-500" />, color: "bg-yellow-100" };
+        return {
+          icon: <IoTime className="text-yellow-500" />,
+          color: "bg-yellow-100",
+        };
       case "Atrasado":
-        return { icon: <IoAlertCircle className="text-red-500" />, color: "bg-red-100" };
+        return {
+          icon: <IoAlertCircle className="text-red-500" />,
+          color: "bg-red-100",
+        };
       default:
         return { icon: null, color: "" };
     }
@@ -93,8 +106,6 @@ export function Boletos() {
       setVisibleBarcode(id);
     }
   };
-
-  
 
   return (
     <div className="p-6">
@@ -144,7 +155,9 @@ export function Boletos() {
                     <TableCell>{boleto.parcela}</TableCell>
                     <TableCell>{boleto.numeroNota}</TableCell>
                     <TableCell>
-                      <div className={`flex items-center gap-2 ${color} px-3 py-1 rounded-full`}>
+                      <div
+                        className={`flex items-center gap-2 ${color} px-3 py-1 rounded-full`}
+                      >
                         {icon}
                         <span>{boleto.status}</span>
                       </div>
@@ -153,8 +166,10 @@ export function Boletos() {
                     <TableCell>{boleto.valor}</TableCell>
                     <TableCell>
                       <Button onClick={() => toggleBarcode(boleto.id)}>
-                        {visibleBarcode === boleto.id ? "Ocultar Código" : "Exibir Código"}
-                      </Button>       
+                        {visibleBarcode === boleto.id
+                          ? "Ocultar Código"
+                          : "Exibir Código"}
+                      </Button>
                     </TableCell>
                   </TableRow>
                   {visibleBarcode === boleto.id && (
@@ -174,8 +189,6 @@ export function Boletos() {
           )}
         </TableBody>
       </Table>
-
-      
     </div>
   );
 }

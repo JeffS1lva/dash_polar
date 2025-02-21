@@ -28,7 +28,7 @@ export function SideBar() {
     );
   }
   return (
-    <nav className="bg-blue-950 p-2 w-full max-w-[14rem] md:w-[25rem] md:h-screen">
+    <nav className="bg-blue-950 p-2 w-full h-full max-w-[14rem] md:w-[25rem] md:h-screen">
       <div className="p-5">
         <img src={Logo} alt="Logo PolarFix" className="" />
       </div>
