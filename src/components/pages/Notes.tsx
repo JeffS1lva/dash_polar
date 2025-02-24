@@ -177,8 +177,8 @@ export function Notes() {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Lista de Notas Fiscais</h2>
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-4">Notas Fiscais</h2>
 
       <div className="mb-4">
         <div className="relative">

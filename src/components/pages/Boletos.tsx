@@ -108,8 +108,8 @@ export function Boletos() {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Registros de Boletos</h2>
+    <div className="p-4 md:p-6">
+      <h2 className="text-xl md:text-2xl font-bold mb-4">Registros de Boletos</h2>
 
       <div className="mb-4">
         <div className="relative">
@@ -127,68 +127,70 @@ export function Boletos() {
         </div>
       </div>
 
-      <Table>
-        <TableCaption>Lista de boletos consultados.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Número da Parcela</TableHead>
-            <TableHead>Número da Nota</TableHead>
-            <TableHead>Status do Boleto</TableHead>
-            <TableHead>Data de Vencimento</TableHead>
-            <TableHead>Valor Total</TableHead>
-            <TableHead>Ações</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredBoletos.length === 0 ? (
+      <div className="overflow-x-auto">
+        <Table>
+          <TableCaption>Lista de boletos consultados.</TableCaption>
+          <TableHeader>
             <TableRow>
-              <TableCell colSpan={6} className="text-center">
-                Nenhum boleto encontrado.
-              </TableCell>
+              <TableHead>Número da Parcela</TableHead>
+              <TableHead>Número da Nota</TableHead>
+              <TableHead>Status do Boleto</TableHead>
+              <TableHead>Data de Vencimento</TableHead>
+              <TableHead>Valor Total</TableHead>
+              <TableHead>Ações</TableHead>
             </TableRow>
-          ) : (
-            filteredBoletos.map((boleto) => {
-              const { icon, color } = getStatusInfo(boleto.status);
-              return (
-                <React.Fragment key={boleto.id}>
-                  <TableRow>
-                    <TableCell>{boleto.parcela}</TableCell>
-                    <TableCell>{boleto.numeroNota}</TableCell>
-                    <TableCell>
-                      <div
-                        className={`flex items-center gap-2 ${color} px-3 py-1 rounded-full`}
-                      >
-                        {icon}
-                        <span>{boleto.status}</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>{boleto.vencimento}</TableCell>
-                    <TableCell>{boleto.valor}</TableCell>
-                    <TableCell>
-                      <Button onClick={() => toggleBarcode(boleto.id)}>
-                        {visibleBarcode === boleto.id
-                          ? "Ocultar Código"
-                          : "Exibir Código"}
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                  {visibleBarcode === boleto.id && (
+          </TableHeader>
+          <TableBody>
+            {filteredBoletos.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={6} className="text-center">
+                  Nenhum boleto encontrado.
+                </TableCell>
+              </TableRow>
+            ) : (
+              filteredBoletos.map((boleto) => {
+                const { icon, color } = getStatusInfo(boleto.status);
+                return (
+                  <React.Fragment key={boleto.id}>
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center">
-                        <img
-                          src={boleto.codigoBarras}
-                          alt="Código de Barras"
-                          className="w-64 mx-auto"
-                        />
+                      <TableCell>{boleto.parcela}</TableCell>
+                      <TableCell>{boleto.numeroNota}</TableCell>
+                      <TableCell>
+                        <div
+                          className={`flex items-center gap-2 ${color} px-3 py-1 rounded-full`}
+                        >
+                          {icon}
+                          <span>{boleto.status}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>{boleto.vencimento}</TableCell>
+                      <TableCell>{boleto.valor}</TableCell>
+                      <TableCell>
+                        <Button onClick={() => toggleBarcode(boleto.id)}>
+                          {visibleBarcode === boleto.id
+                            ? "Ocultar Código"
+                            : "Exibir Código"}
+                        </Button>
                       </TableCell>
                     </TableRow>
-                  )}
-                </React.Fragment>
-              );
-            })
-          )}
-        </TableBody>
-      </Table>
+                    {visibleBarcode === boleto.id && (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center">
+                          <img
+                            src={boleto.codigoBarras}
+                            alt="Código de Barras"
+                            className="w-64 mx-auto"
+                          />
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </React.Fragment>
+                );
+              })
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }
